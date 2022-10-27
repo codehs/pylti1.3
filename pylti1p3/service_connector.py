@@ -78,7 +78,7 @@ class ServiceConnector(object):
         }
 
         # Make request to get auth token
-        r = requests.post(auth_url, data=auth_request)
+        r = requests.post(auth_url, data=auth_request, verify=False)
         if not r.ok:
             raise LtiServiceException(r)
         response = r.json()
@@ -111,9 +111,9 @@ class ServiceConnector(object):
         if is_post:
             headers['Content-Type'] = content_type
             post_data = data or None
-            r = requests.post(url, data=post_data, headers=headers)
+            r = requests.post(url, data=post_data, headers=headers, verify=False)
         else:
-            r = requests.get(url, headers=headers)
+            r = requests.get(url, headers=headers, verify=False)
 
         if not r.ok:
             raise LtiServiceException(r)

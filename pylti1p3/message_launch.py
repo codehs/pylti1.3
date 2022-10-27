@@ -438,7 +438,7 @@ class MessageLaunch(t.Generic[REQ, TCONF, SES, COOK]):
                     return public_key
 
             try:
-                resp = requests.get(key_set_url)
+                resp = requests.get(key_set_url, verify=False)
             except requests.exceptions.RequestException as e:
                 raise LtiException("Error during fetch URL " + key_set_url + ": " + str(e))
             try:
